@@ -14,3 +14,6 @@ Seismic data fault detection has recently been regarded as a 3D image segmentati
 # Results
 <div align=center><img src="https://github.com/douyimin/FaultNet/blob/main/results/New_Zealand.png" width="760" height="580" alt="New_Zealand"/><br/>
 <img src="https://github.com/douyimin/FaultNet/blob/main/results/FORCE_ML.png" width="760" height="1123" alt="FORCE fault identification competition]"/><br/></div>
+
+# Contact us
+emindou3015@gmail.com
