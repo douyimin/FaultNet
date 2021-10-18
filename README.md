@@ -5,6 +5,7 @@ Seismic data fault detection has recently been regarded as a 3D image segmentati
 
 # Quick start
 Get test data (Kerry3D): https://drive.google.com/file/d/1FXQ7mF-1noUm3pWBPTFbXaWkHpmA2ZnY/view?usp=sharing
+    
     conda install pytorch torchvision torchaudio cudatoolkit=10.2 -c pytorch
     pip install segyio,opencv_python
     cd FaultNet
