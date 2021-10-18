@@ -8,6 +8,7 @@ Get test data (Kerry3D): https://drive.google.com/file/d/1FXQ7mF-1noUm3pWBPTFbXa
     
     conda install pytorch torchvision torchaudio cudatoolkit=10.2 -c pytorch
     pip install segyio,opencv_python
+    cp ./download/kerry.npy ./FaultNet/data/
     cd FaultNet
     python prediction.py --input data/kerry.npy
 
