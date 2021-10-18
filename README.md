@@ -10,7 +10,7 @@ Get test data (Kerry3D): https://drive.google.com/file/d/1FXQ7mF-1noUm3pWBPTFbXa
     pip install segyio,opencv_python
     cp ./download/kerry.npy ./FaultNet/data/
     cd FaultNet
-    python prediction.py --input data/kerry.npy
+    python prediction.py --input data/kerry.npy --infer_size 272 608 256
 
 # Results
 <div align=center><img src="https://github.com/douyimin/FaultNet/blob/main/results/New_Zealand.png" width="760" height="580" alt="New_Zealand"/><br/>
