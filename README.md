@@ -15,9 +15,12 @@ Get test data (Kerry3D): https://drive.google.com/file/d/1FXQ7mF-1noUm3pWBPTFbXa
 # Results
 <div align=center><img src="https://github.com/douyimin/FaultNet/blob/main/results/New_Zealand.png" width="760" height="580" alt="New_Zealand"/><br/>
 <img src="https://github.com/douyimin/FaultNet/blob/main/results/FORCE_ML.png" width="760" height="1123" alt="FORCE fault identification competition]"/><br/></div>
+
 # Cite us
    
-     Dou, Yimin, et al. "Efficient Training of 3D Seismic Image Fault Segmentation Network under Sparse Labels by Weakening Anomaly Annotation." arXiv preprint arXiv:2110.05319 (2021).
+     Dou, Yimin, et al. 
+     "Efficient Training of 3D Seismic Image Fault Segmentation Network under Sparse Labels by Weakening Anomaly Annotation."
+     arXiv preprint arXiv:2110.05319 (2021).
 
 # Contact us
 emindou3015@gmail.com
