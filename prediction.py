@@ -29,7 +29,8 @@ parser.add_argument('--iline', type=int, default=189,
                     help='inline')  # 189 or 77, If none of them work, please fill the trace export in the commercial software and then read it.
 parser.add_argument('--xline', type=int, default=181,
                     help='crossline')  # 193 or 73,If none of them work, please fill the trace export in the commercial software and then read it.
-parser.add_argument('--gamma', type=float, default=0.7, help='Must 0.5,0.6,0.7')
+parser.add_argument('--gamma', type=float, default=0.5, help='Must 0.5,0.6,0.7')
+parser.add_argument('--half', type=bool, default=True, help='if true, predict by FP16')
 parser.add_argument('--infer_size', type=int, nargs='+', default=(272, 608, 256),
                     help='Support up to 528^3 on 16G-GPU / 320^3 on 11GB-GPU. Shape = (tline,xline,iline) or (tline,iline,xline), must be divisible by 16')
 parser.add_argument('--output_dir', type=str, default='output', help='Output dir')
@@ -42,11 +43,20 @@ if __name__ == '__main__':
     assert args.input[-3:] == 'npy' or args.input[-4:] == 'segy' or args.input[-3:] == 'sgy'
     assert args.infer_size[0] % 16 == 0 and args.infer_size[1] % 16 == 0 and args.infer_size[2] % 16 == 0
     if args.gamma == 0.5:
-        model = torch.jit.load('network/FaultNet_Gamma05.pt').to(device)
+        if args.half:
+            model = torch.jit.load('network/FaultNet_Gamma05_half.pt').to(device)
+        else:
+            model = torch.jit.load('network/FaultNet_Gamma05.pt').to(device)
     elif args.gamma == 0.6:
-        model = torch.jit.load('network/FaultNet_Gamma06.pt').to(device)
+        if args.half:
+            model = torch.jit.load('network/FaultNet_Gamma06_half.pt').to(device)
+        else:
+            model = torch.jit.load('network/FaultNet_Gamma06.pt').to(device)
     else:
-        model = torch.jit.load('network/FaultNet_Gamma07.pt').to(device)
+        if args.half:
+            model = torch.jit.load('network/FaultNet_Gamma07_half.pt').to(device)
+        else:
+            model = torch.jit.load('network/FaultNet_Gamma07.pt').to(device)
     if args.input[-3:] == 'npy':
         data = np.load(args.input).transpose((2, 0, 1))  # Shape = (tline,xline,iline) or (tline,iline,xline),
     else:
@@ -55,7 +65,7 @@ if __name__ == '__main__':
     print('Load data successful.')
     print(f'Data size is {tuple(data.shape)}, infer size is {args.infer_size}.')
     create_out_dir(args.output_dir, args.input)
-    output = prediction(model, data, device, args.infer_size)
+    output = prediction(model, data, device, args)
     print('Inference complete. Save results...')
     if args.save_fault_cuboid:
         if args.input[-3:] == 'npy':

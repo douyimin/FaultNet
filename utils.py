@@ -30,11 +30,11 @@ def normalization_2(data):
 def z_score(data):
     return (data - np.mean(data)) / np.std(data)
 
-def prediction(model, data, device, infer_size):
+def prediction(model, data, device, args):
     with torch.no_grad():
         ol = 1
         model.eval()
-        n1, n2, n3 = infer_size
+        n1, n2, n3 = args.infer_size
         input_tensor = torch.from_numpy(data)
         m1, m2, m3 = data.shape
         c1 = np.ceil((m1 + ol) / (n1 - ol)).astype(np.int)
@@ -46,6 +46,41 @@ def prediction(model, data, device, infer_size):
         gp = torch.zeros((p1, p2, p3)).float()
         gy = np.zeros((p1, p2, p3), dtype=np.single)
         gp[0:m1, 0:m2, 0:m3] = input_tensor
+        if args.half:
+            gp = gp.half()
+        for k1 in range(c1):
+            for k2 in range(c2):
+                for k3 in range(c3):
+                    b1 = k1 * n1 - k1 * ol
+                    e1 = b1 + n1
+                    b2 = k2 * n2 - k2 * ol
+                    e2 = b2 + n2
+                    b3 = k3 * n3 - k3 * ol
+                    e3 = b3 + n3
+                    gs = gp[b1:e1, b2:e2, b3:e3]
+                    gs = normalization(gs[None, None, :, :, :]).to(device)
+                    Y = model(gs).cpu().numpy()
+                    gy[b1:e1, b2:e2, b3:e3] = gy[b1:e1, b2:e2, b3:e3] + Y[0, 0, :, :, :]
+    return gy[:m1, :m2, :m3]
+
+def jupyter_prediction(model, data, device, args):
+    with torch.no_grad():
+        ol = 1
+        model.eval()
+        n1, n2, n3 = args['infer_size']
+        input_tensor = torch.from_numpy(data)
+        m1, m2, m3 = data.shape
+        c1 = np.ceil((m1 + ol) / (n1 - ol)).astype(np.int)
+        c2 = np.ceil((m2 + ol) / (n2 - ol)).astype(np.int)
+        c3 = np.ceil((m3 + ol) / (n3 - ol)).astype(np.int)
+        p1 = (n1 - ol) * c1 + ol
+        p2 = (n2 - ol) * c2 + ol
+        p3 = (n3 - ol) * c3 + ol
+        gp = torch.zeros((p1, p2, p3)).float()
+        gy = np.zeros((p1, p2, p3), dtype=np.single)
+        gp[0:m1, 0:m2, 0:m3] = input_tensor
+        if args['half']:
+            gp = gp.half()
         for k1 in range(c1):
             for k2 in range(c2):
                 for k3 in range(c3):
