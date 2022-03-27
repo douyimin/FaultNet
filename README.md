@@ -1,20 +1,19 @@
 # Introduction
 
 **FaultNet:**
-Seismic data fault detection has recently been regarded as a 3D image segmentation task. The nature of fault structures in seismic image makes it difficult to manually label faults. Manual labeling often has many false negative labels (abnormal annotations), which will seriously harm the training process. In this work, we find that region-based loss significantly outperforms distribution-based loss when dealing with false negative labels, therefore we proposed Mask Dice loss (MD loss), which is the first reported region-based loss function for training 3D image segmentation networks using sparse 2D slice labels. In addition, fault is an edge feature, and the current network widely used for fault segmentation downsamples the features multiple times, which is not conducive to edge representation and thus requires many parameters and computational effort to preserve the features. We proposed Fault-Net, which uses a high-resolution and shallow structure to propagate multiple-scale features in parallel, fully preserving edge features. Meanwhile, in order to efficiently fuse multi-scale features, we decouple the convolution process into feature selection and channel fusion, and proposed a lightweight feature fusion block, Multi-Scale Compression Fusion (MCF). Because the Fault-Net always keeps the edge features during propagation, only few parameters and computation are required. Experimental results show that MD loss can clearly weaken the effect of anomalous labels. The Fault-Net parameter is only 0.42MB, support up to 528^3(Float32) 640^3(Float16) size cuboid inference on 16GB video ram, its inference speed on CPU and GPU is significantly faster than other networks. It works well on most of the open data seismic images, and the result of our method is the state-of-the-art in the FORCE fault identification competition.
+Data-driven fault detection has been regarded as a 3D image segmentation task. The models trained from synthetic data are difficult to generalize in some surveys. Recently, training 3D fault segmentation using sparse manual 2D slices is thought to yield promising results, but manual labeling has many false negative labels (abnormal annotations), which is detrimental to training and consequently to detection performance. Motivated to train 3D fault segmentation networks under sparse 2D labels while suppressing false negative labels, we analyze the training process gradient and propose the Mask Dice (MD) loss. Moreover, the fault is an edge feature, and current encoderdecoder architectures widely used for fault detection (e.g., Ushape network) are not conducive to edge representation and have redundant parameters. Consequently, Fault-Net is proposed, which is designed for the characteristics of faults, employs high-resolution propagation features, and embeds Multi-Scale Compression Fusion module to fuse multi-scale information, which allows the edge information to be fully preserved during propagation and fusion, thus enabling advanced performance via few computational resources. Experimental demonstrates that MD loss supports the inclusion of human experience in training and suppresses false negative labels therein, enabling baseline models to improve performance and generalize to more surveys. The Fault-Net parameter is only 0.42MB, support up to 528^3 (FP32) and 640^3 (FP16) size cuboid inference on 16GB RAM, its inference speed is significantly faster than other models. Our approach employs fewer computational resources while providing more reliable and clearer interpretations of seismic faults..
 
 # Quick start
-Get test data (Kerry3D): https://drive.google.com/file/d/1FXQ7mF-1noUm3pWBPTFbXaWkHpmA2ZnY/view?usp=sharing
+Get test data (F3 and Kerry3D): https://drive.google.com/drive/folders/1LEHd2VO9TZTOjrMuAQ7I446OfYDgcdWo?usp=sharing
     
-    conda install pytorch torchvision torchaudio cudatoolkit=10.2 -c pytorch
+    conda install pytorch torchvision torchaudio cudatoolkit=11.3 -c pytorch
     pip install segyio,opencv_python
     cp ./download/kerry.npy ./FaultNet/data/
     cd FaultNet
-    python prediction.py --input data/kerry.npy --infer_size 272 608 256
+    python prediction.py --input data/F3.npy
 
 # Results
-<div align=center><img src="https://github.com/douyimin/FaultNet/blob/main/results/New_Zealand.png" width="760" height="580" alt="New_Zealand"/><br/>
-<img src="https://github.com/douyimin/FaultNet/blob/main/results/FORCE_ML.png" width="760" height="1123" alt="FORCE fault identification competition]"/><br/></div>
+<div align=center><img src="https://github.com/douyimin/FaultNet/blob/main/results/output.png" width="228" height="254" alt="Results"/><br/></div>
 
 # Cite us
    
