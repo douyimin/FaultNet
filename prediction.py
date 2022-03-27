@@ -29,8 +29,7 @@ parser.add_argument('--iline', type=int, default=189,
                     help='inline')  # 189 or 77, If none of them work, please fill the trace export in the commercial software and then read it.
 parser.add_argument('--xline', type=int, default=193,
                     help='crossline')  # 193 or 73,If none of them work, please fill the trace export in the commercial software and then read it.
-parser.add_argument('--gamma', type=float, default=0.6, help='Must 0.5,0.6,0.7')
-parser.add_argument('--half', type=bool, default=True, help='if true, predict by FP16')
+parser.add_argument('--gamma', type=float, default=0.7, help='Must 0.5,0.6,0.7')
 parser.add_argument('--infer_size', type=int, nargs='+', default=None,
                     help='If None, the whole seismic volume is input.'
                          'If not None, the volume will be cut in blocks according to infer_size then input.'
