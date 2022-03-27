@@ -13,7 +13,7 @@ Get test data (F3 and Kerry3D): https://drive.google.com/drive/folders/1LEHd2VO9
     python prediction.py --input data/F3.npy
 
 # Results
-<div align=center><img src="https://github.com/douyimin/FaultNet/blob/main/results/output.png" width="910" height="585" alt="Results"/><br/></div>
+<div align=center><img src="https://github.com/douyimin/FaultNet/blob/main/results/output.png" width="805" height="517" alt="Results"/><br/></div>
 
 # Cite us
    
