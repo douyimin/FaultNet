@@ -8,7 +8,7 @@ Get test data (F3 and Kerry3D): https://drive.google.com/drive/folders/1LEHd2VO9
     
     conda install pytorch torchvision torchaudio cudatoolkit=11.3 -c pytorch
     pip install segyio,opencv_python
-    cp ./download/kerry.npy ./FaultNet/data/
+    cp ./download/F3.npy ./FaultNet/data/
     cd FaultNet
     python prediction.py --input data/F3.npy
 
