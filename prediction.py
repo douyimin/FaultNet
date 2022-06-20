@@ -38,7 +38,8 @@ parser.add_argument('--output_dir', type=str, default='output', help='Output dir
 parser.add_argument('--save_fault_cuboid', type=bool, default=False, help='')
 args = parser.parse_args()
 
-device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
+device = torch.device("cuda:0" if torch.cuda.is_available() else 'cpu')
+
 if __name__ == '__main__':
     assert args.gamma == 0.5 or args.gamma == 0.6 or args.gamma == 0.7
     assert args.input[-3:] == 'npy' or args.input[-4:] == 'segy' or args.input[-3:] == 'sgy'
@@ -50,7 +51,8 @@ if __name__ == '__main__':
         model = torch.jit.load('network/FaultNet_Gamma0.6.pt').to(device)
     else:
         model = torch.jit.load('network/FaultNet_Gamma0.7.pt').to(device)
-    if device == 'cpu': model = model.float()
+
+    if device.type != 'cpu': model = model.half()
 
     if args.input[-3:] == 'npy':
         data = np.load(args.input).transpose((2, 0, 1))  # Shape = (tline,xline,iline) or (tline,iline,xline),
