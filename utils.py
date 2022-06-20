@@ -49,7 +49,7 @@ def cubing_prediction(model, data, device, infer_size):
         gp = torch.zeros((p1, p2, p3)).float() + 0.5
         gy = np.zeros((p1, p2, p3), dtype=np.single)
         gp[:m1, :m2, :m3] = input_tensor
-        if device != 'cpu': gp = gp.half()
+        if device.type != 'cpu': gp = gp.half()
         for k1 in range(c1):
             for k2 in range(c2):
                 for k3 in range(c3):
@@ -76,7 +76,10 @@ def prediction(model, data, device):
     input_tensor = np.zeros((c1, c2, c3), dtype=np.float32) + 0.5
     input_tensor[:m1, :m2, :m3] = data
     input_tensor = torch.from_numpy(input_tensor)[None, None, :, :, :].to(device)
-    if device != 'cpu': input_tensor = input_tensor.half()
+    if device.type == 'cpu':
+        input_tensor = input_tensor.float()
+    else:
+        input_tensor = input_tensor.half()
     with torch.no_grad():
         result = model(input_tensor).cpu().numpy()[0, 0, :m1, :m2, :m3]
     return result
