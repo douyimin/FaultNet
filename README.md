@@ -18,7 +18,8 @@ Get test data (F3 and Kerry3D): https://drive.google.com/drive/folders/1LEHd2VO9
 # Cite us
    
      Dou, Yimin, et al. 
-     "MD Loss: Efficient Training of 3D Seismic Fault Segmentation Network under Sparse Labels by Weakening Anomaly Annotation," in IEEE Transactions on Geoscience and Remote Sensing, 2022, doi: 10.1109/TGRS.2022.3196810.
+     "MD Loss: Efficient Training of 3D Seismic Fault Segmentation Network under Sparse Labels by Weakening Anomaly Annotation," 
+     IEEE Transactions on Geoscience and Remote Sensing, 2022, doi: 10.1109/TGRS.2022.3196810.
 
 # Contact us
 emindou3015@gmail.com
