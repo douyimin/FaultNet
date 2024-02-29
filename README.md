@@ -17,14 +17,14 @@ Get test data (F3 and Kerry3D): https://drive.google.com/drive/folders/1LEHd2VO9
 
 # Cite us
    
-    @article{dou2023mda,
-    title={MDA GAN: Adversarial-Learning-based 3-D Seismic Data Interpolation and Reconstruction for Complex Missing},
-    author={Dou, Yimin and Li, Kewen and Duan, Hongjie and Li, Timing and Dong, Lin and Huang, Zongchao},
-    journal={IEEE Transactions on Geoscience and Remote Sensing},
-    volume={61},
-    pages={1--14},
-    year={2023},
-    publisher={IEEE}
+    @article{dou2022md,
+      title={MD loss: Efficient training of 3-D seismic fault segmentation network under sparse labels by weakening anomaly annotation},
+      author={Dou, Yimin and Li, Kewen and Zhu, Jianbing and Li, Timing and Tan, Shaoquan and Huang, Zongchao},
+      journal={IEEE Transactions on Geoscience and Remote Sensing},
+      volume={60},
+      pages={1--14},
+      year={2022},
+      publisher={IEEE}
     }
 
 # Contact us
